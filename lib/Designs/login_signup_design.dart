@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:yt_neumorphism_login_ui/const.dart';
+import 'package:yt_neumorphism_login_ui/widgets/un_pw_input.dart';
 
 class LoginSignupDesign extends StatefulWidget {
   const LoginSignupDesign({super.key});
@@ -9,8 +11,24 @@ class LoginSignupDesign extends StatefulWidget {
 }
 
 class _LoginSignupDesignState extends State<LoginSignupDesign> {
-  var backgroundColor = Colors.grey[300];
-  Color darkColor = const Color(0XFF0D2750);
+  final Icon _icon1 = Icon(Icons.person);
+  final Icon _icon2 = Icon(Icons.lock);
+  final TextEditingController _controller1 = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+  late String userName;
+  late String password;
+  late String UI = '';
+
+  printUsr() {
+    userName = _controller1.text;
+    password = _controller2.text;
+    print(userName);
+    print(password);
+
+    setState(() {
+      UI = userName;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +46,7 @@ class _LoginSignupDesignState extends State<LoginSignupDesign> {
             color: backgroundColor,
             borderRadius: BorderRadius.circular(18),
             boxShadow: [
-              BoxShadow(
+              const BoxShadow(
                 color: Colors.white,
                 blurRadius: 20,
                 offset: Offset(-10, -10),
@@ -45,15 +63,15 @@ class _LoginSignupDesignState extends State<LoginSignupDesign> {
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
+              children: <Widget>[
+                const Text(
                   "Login",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -64,107 +82,76 @@ class _LoginSignupDesignState extends State<LoginSignupDesign> {
                   ),
                 ),
 
-                //
-
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                Text(
-                  "Username",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: backgroundColor,
-                    borderRadius: BorderRadius.circular(25),
-                    boxShadow: [
-                      BoxShadow(
-                          color: darkColor.withOpacity(0.4),
-                          blurRadius: 2,
-                          offset: Offset(5, 5),
-                          inset: true),
-                      BoxShadow(
-                        color: Colors.white,
-                        blurRadius: 3,
-                        offset: Offset(-4, -4),
-                        inset: true,
-                      ),
-                    ],
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.person),
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-                    ),
-                  ),
-                )
 
-                //
+                // username input field
 
-                ,
-                SizedBox(
-                  height: 40,
-                ),
-                Text(
-                  "Password",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: backgroundColor,
-                    borderRadius: BorderRadius.circular(25),
-                    boxShadow: [
-                      BoxShadow(
-                          color: darkColor.withOpacity(0.4),
-                          blurRadius: 2,
-                          offset: Offset(5, 5),
-                          inset: true),
-                      BoxShadow(
-                        color: Colors.white,
-                        blurRadius: 3,
-                        offset: Offset(-4, -4),
-                        inset: true,
-                      ),
-                    ],
-                  ),
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.lock),
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-                    ),
-                  ),
+                inputPassword("Username", _icon1, _controller1, false),
+
+                const SizedBox(
+                  height: 20,
                 ),
 
-                SizedBox(
+                // password input field
+                inputPassword("Password", _icon2, _controller2, true),
+                const SizedBox(
+                  height: 20,
+                ),
+
+                // const Text(
+                //   "Password",
+                //   style: TextStyle(
+                //     fontWeight: FontWeight.w500,
+                //     fontSize: 16,
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 2,
+                // ),
+                // Container(
+                //   decoration: BoxDecoration(
+                //     color: backgroundColor,
+                //     borderRadius: BorderRadius.circular(25),
+                //     boxShadow: [
+                //       BoxShadow(
+                //           color: darkColor.withOpacity(0.4),
+                //           blurRadius: 2,
+                //           offset: Offset(5, 5),
+                //           inset: true),
+                //       const BoxShadow(
+                //         color: Colors.white,
+                //         blurRadius: 3,
+                //         offset: Offset(-4, -4),
+                //         inset: true,
+                //       ),
+                //     ],
+                //   ),
+                //   child: TextFormField(
+                //     obscureText: true,
+                //     decoration: const InputDecoration(
+                //       border: InputBorder.none,
+                //       prefixIcon: Icon(Icons.lock),
+                //       contentPadding:
+                //           EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                //     ),
+                //   ),
+                // ),
+
+                const SizedBox(
                   height: 20,
                 ),
 
                 Row(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(1),
+                      padding: const EdgeInsets.all(1),
                       decoration: BoxDecoration(
                           color: backgroundColor,
                           borderRadius: BorderRadius.circular(4),
                           boxShadow: [
-                            BoxShadow(
+                            const BoxShadow(
                                 color: Colors.white,
                                 blurRadius: 5,
                                 offset: Offset(-5, -5)),
@@ -174,12 +161,14 @@ class _LoginSignupDesignState extends State<LoginSignupDesign> {
                               offset: Offset(5, 5),
                             ),
                           ]),
-                      child: Icon(Icons.check),
+                      child: Icon(
+                        Icons.check,
+                      ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text(
+                    const Text(
                       "Remember me",
                       style: TextStyle(
                         color: Colors.grey,
@@ -187,8 +176,8 @@ class _LoginSignupDesignState extends State<LoginSignupDesign> {
                         fontSize: 16,
                       ),
                     ),
-                    Spacer(),
-                    Text(
+                    const Spacer(),
+                    const Text(
                       "forgot password?",
                       style: TextStyle(
                         color: Colors.blue,
@@ -198,45 +187,50 @@ class _LoginSignupDesignState extends State<LoginSignupDesign> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Center(
-                  child: Container(
-                    width: screenWidth * 0.7,
-                    height: screenHeigth * 0.05,
-                    decoration: BoxDecoration(
-                      color: backgroundColor,
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white,
-                          blurRadius: 8,
-                          offset: Offset(-7, -7),
+                  child: GestureDetector(
+                    onTap: () {
+                      printUsr();
+                    },
+                    child: Container(
+                      width: screenWidth * 0.7,
+                      height: screenHeigth * 0.05,
+                      decoration: BoxDecoration(
+                        color: backgroundColor,
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: [
+                          const BoxShadow(
+                            color: Colors.white,
+                            blurRadius: 8,
+                            offset: Offset(-7, -7),
+                          ),
+                          BoxShadow(
+                            color: darkColor.withOpacity(0.3),
+                            blurRadius: 10,
+                            offset: Offset(7, 7),
+                          ),
+                        ],
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.green),
                         ),
-                        BoxShadow(
-                          color: darkColor.withOpacity(0.3),
-                          blurRadius: 10,
-                          offset: Offset(7, 7),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.green),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
 
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -255,6 +249,7 @@ class _LoginSignupDesignState extends State<LoginSignupDesign> {
                     ),
                   ],
                 ),
+                Text(UI),
               ],
             ),
           ),
